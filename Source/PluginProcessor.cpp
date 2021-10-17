@@ -22,6 +22,8 @@ BasicSynthV1AudioProcessor::BasicSynthV1AudioProcessor()
                        )
 #endif
 {
+    synth.addSound(new SynthSound());
+    synth.addVoice(new SynthVoice());
 }
 
 BasicSynthV1AudioProcessor::~BasicSynthV1AudioProcessor()
