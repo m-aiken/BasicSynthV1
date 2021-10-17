@@ -28,6 +28,13 @@ private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     BasicSynthV1AudioProcessor& audioProcessor;
+    
+    juce::Slider attackSlider, decaySlider, sustainSlider, releaseSlider;
+    juce::ComboBox oscSelector;
+    
+    juce::AudioProcessorValueTreeState::SliderAttachment attackAttachment, decayAttachment, sustainAttachment, releaseAttachment;
+    
+    juce::AudioProcessorValueTreeState::ComboBoxAttachment oscSelectorAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicSynthV1AudioProcessorEditor)
 };

@@ -185,6 +185,24 @@ void BasicSynthV1AudioProcessor::setStateInformation (const void* data, int size
     // whose contents will have been created by the getStateInformation() call.
 }
 
+juce::AudioProcessorValueTreeState::ParameterLayout BasicSynthV1AudioProcessor::getParameterLayout()
+{
+    juce::AudioProcessorValueTreeState::ParameterLayout layout;
+    
+    // Choice box for osc type
+    juce::StringArray oscTypes ("Sine", "Saw", "Square");
+    layout.add(std::make_unique<juce::AudioParameterChoice> ("oscType", "Oscillator Type", oscTypes, 0));
+    
+    // ADSR
+    // NoramalisableRange args are rangeStart, rangeEnd, interval, defaultValue
+    layout.add(std::make_unique<juce::AudioParameterFloat> ("attack",  "Attack",  juce::NormalisableRange<float> (0.1f, 1.0f, 0.01f), 0.1f));
+    layout.add(std::make_unique<juce::AudioParameterFloat> ("decay",   "Decay",   juce::NormalisableRange<float> (0.1f, 1.0f, 0.01f), 0.1f));
+    layout.add(std::make_unique<juce::AudioParameterFloat> ("sustain", "Sustain", juce::NormalisableRange<float> (0.1f, 1.0f, 0.01f), 1.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat> ("release", "Release", juce::NormalisableRange<float> (0.1f, 3.0f, 0.01f), 0.4f));
+    
+    return layout;
+}
+
 //==============================================================================
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()

@@ -11,7 +11,12 @@
 
 //==============================================================================
 BasicSynthV1AudioProcessorEditor::BasicSynthV1AudioProcessorEditor (BasicSynthV1AudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+    : AudioProcessorEditor (&p), audioProcessor (p),
+      attackAttachment (audioProcessor.apvts, "attack", attackSlider),
+      decayAttachment (audioProcessor.apvts, "decay", decaySlider),
+      sustainAttachment (audioProcessor.apvts, "sustain", sustainSlider),
+      releaseAttachment (audioProcessor.apvts, "release", releaseSlider),
+      oscSelectorAttachment (audioProcessor.apvts, "oscType", oscSelector)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
