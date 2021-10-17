@@ -21,7 +21,17 @@ public:
     void stopNote (float velocity, bool allowTailOff) override;
     void pitchWheelMoved (int newPitchWheelValue) override;
     void controllerMoved (int controllerNumber, int newControllerValue) override;
+    void prepareToPlay (double sampleRate, int samplesPerBlock, int outputChannels); // Not override as this fn doesn't come from juce::SynthesiserVoice
     void renderNextBlock (juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples) override;
 private:
+    juce::ADSR adsr;
+    juce::ADSR::Parameters adsrParams;
     
+    juce::dsp::Oscillator<float> osc { [](float x) { return std::sin (x); } };
+    juce::dsp::Gain<float> gain;
+    bool isPrepared { false };
+    
+    // [](float x) { return std::sin (x); }                 // Sine Wave
+    // [](float x) { return x / MathConstants<float>::pi; } // Saw Wave
+    // [](float x) { return x < 0.0f ? -1.0f : 1.0f; }      // Square Wave
 };
