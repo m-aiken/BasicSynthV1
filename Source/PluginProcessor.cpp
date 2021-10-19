@@ -151,16 +151,18 @@ void BasicSynthV1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
     
     for (int i = 0; i < synth.getNumVoices(); ++i)
     {
-        if (auto voice = dynamic_cast<juce::SynthesiserSound*>(synth.getVoice(i)))
+        if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
         {
             // Osc, ADSR, LFO controls...
+            auto& attack  = *apvts.getRawParameterValue ("attack");
+            auto& decay   = *apvts.getRawParameterValue ("decay");
+            auto& sustain = *apvts.getRawParameterValue ("sustain");
+            auto& release = *apvts.getRawParameterValue ("release");
+            
+            voice->updateAdsr (attack.load(), decay.load(), sustain.load(), release.load());
         }
     }
-    /*
-    for (const juce::MidiMessageMetadata metadata : midiMessages)
-            if (metadata.numBytes == 3)
-                juce::Logger::writeToLog ("Timestamp: " + juce::String (metadata.getMessage().getTimeStamp()));
-    */
+    
     synth.renderNextBlock (buffer, midiMessages, 0, buffer.getNumSamples());
 }
 

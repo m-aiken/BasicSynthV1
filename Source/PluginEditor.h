@@ -30,11 +30,14 @@ private:
     BasicSynthV1AudioProcessor& audioProcessor;
     
     juce::Slider attackSlider, decaySlider, sustainSlider, releaseSlider;
+    juce::Label  attackLabel,  decayLabel,  sustainLabel,  releaseLabel;
     juce::ComboBox oscSelector;
     
     juce::AudioProcessorValueTreeState::SliderAttachment attackAttachment, decayAttachment, sustainAttachment, releaseAttachment;
     
     juce::AudioProcessorValueTreeState::ComboBoxAttachment oscSelectorAttachment;
+    
+    void addADSRSlider (juce::Slider &slider, juce::Label &label, const juce::String &labelText);
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicSynthV1AudioProcessorEditor)
 };
