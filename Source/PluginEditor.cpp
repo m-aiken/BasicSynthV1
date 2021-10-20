@@ -20,10 +20,10 @@ BasicSynthV1AudioProcessorEditor::BasicSynthV1AudioProcessorEditor (BasicSynthV1
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    addADSRSlider (attackSlider, attackLabel, "Attack");
-    addADSRSlider (decaySlider, decayLabel, "Decay");
-    addADSRSlider (sustainSlider, sustainLabel, "Sustain");
-    addADSRSlider (releaseSlider, releaseLabel, "Release");
+    addADSRSlider (attackSlider, attackLabel, "A");
+    addADSRSlider (decaySlider, decayLabel, "D");
+    addADSRSlider (sustainSlider, sustainLabel, "S");
+    addADSRSlider (releaseSlider, releaseLabel, "R");
     
     setSize (400, 300);
 }
@@ -63,9 +63,10 @@ void BasicSynthV1AudioProcessorEditor::resized()
 void BasicSynthV1AudioProcessorEditor::addADSRSlider (juce::Slider &slider, juce::Label &label, const juce::String &labelText)
 {
     addAndMakeVisible (slider);
-    addAndMakeVisible (label);
     slider.setSliderStyle (juce::Slider::SliderStyle::LinearVertical);
     slider.setTextBoxStyle (juce::Slider::TextBoxBelow, false, 40, 20);
+    
+    addAndMakeVisible (label);
     label.setText (labelText, juce::dontSendNotification);
     label.setJustificationType (juce::Justification::centred);
     label.attachToComponent (&slider, false);
