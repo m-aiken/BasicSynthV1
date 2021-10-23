@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "ADSR/AdsrComponent.h"
 
 //==============================================================================
 /**
@@ -29,15 +30,10 @@ private:
     // access the processor object that created it.
     BasicSynthV1AudioProcessor& audioProcessor;
     
-    juce::Slider attackSlider, decaySlider, sustainSlider, releaseSlider;
-    juce::Label  attackLabel,  decayLabel,  sustainLabel,  releaseLabel;
+    AdsrComponent adsr;
+    
     juce::ComboBox oscSelector;
-    
-    juce::AudioProcessorValueTreeState::SliderAttachment attackAttachment, decayAttachment, sustainAttachment, releaseAttachment;
-    
     juce::AudioProcessorValueTreeState::ComboBoxAttachment oscSelectorAttachment;
     
-    void addADSRSlider (juce::Slider &slider, juce::Label &label, const juce::String &labelText);
-
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicSynthV1AudioProcessorEditor)
 };
