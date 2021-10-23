@@ -44,8 +44,8 @@ void AdsrComponent::resized()
     
     juce::Grid adsrSliders;
     
-    adsrSliders.templateRows    = { Track (Fr (1)) };
     adsrSliders.templateColumns = { Track (Fr (1)), Track (Fr (1)), Track (Fr (1)), Track (Fr (1)) };
+    adsrSliders.templateRows    = { Track (Fr (1)) };
     
     adsrSliders.items = { juce::GridItem (attackSlider), juce::GridItem (decaySlider), juce::GridItem (sustainSlider), juce::GridItem (releaseSlider) };
     

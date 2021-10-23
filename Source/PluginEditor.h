@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "ADSR/AdsrComponent.h"
+#include "Osc/OscComponent.h"
 
 //==============================================================================
 /**
@@ -31,9 +32,7 @@ private:
     BasicSynthV1AudioProcessor& audioProcessor;
     
     AdsrComponent adsr;
-    
-    juce::ComboBox oscSelector;
-    juce::AudioProcessorValueTreeState::ComboBoxAttachment oscSelectorAttachment;
+    OscComponent  oscSelector;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicSynthV1AudioProcessorEditor)
 };

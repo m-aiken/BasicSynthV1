@@ -159,7 +159,10 @@ void BasicSynthV1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
             auto& sustain = *apvts.getRawParameterValue ("sustain");
             auto& release = *apvts.getRawParameterValue ("release");
             
+            auto& oscWave = *apvts.getRawParameterValue ("oscType");
+            
             voice->updateAdsr (attack.load(), decay.load(), sustain.load(), release.load());
+            voice->setWaveType (oscWave);
         }
     }
     
@@ -196,8 +199,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicSynthV1AudioProcessor::
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
     
     // Choice box for osc type
-    juce::StringArray oscTypes ("Sine", "Saw", "Square");
-    layout.add(std::make_unique<juce::AudioParameterChoice> ("oscType", "Oscillator Type", oscTypes, 0));
+//    juce::StringArray oscTypes { "Sine", "Saw", "Square" };
+//    layout.add(std::make_unique<juce::AudioParameterChoice> ("oscType", "Oscillator Type", oscTypes, 0));
+    layout.add(std::make_unique<juce::AudioParameterChoice> ("oscType", "Oscillator Type", juce::StringArray { "Sine", "Saw", "Square" }, 0));
     
     // ADSR
     // NoramalisableRange args are rangeStart, rangeEnd, interval, defaultValue

@@ -66,6 +66,28 @@ void SynthVoice::updateAdsr (const float attack, const float decay, const float 
     adsr.setParameters (adsrParams);
 }
 
+void SynthVoice::setWaveType (const int choice)
+{
+    switch (choice)
+    {
+        case 0:
+            // Sine Wave
+            osc.initialise ([](float x) { return std::sin (x); });
+            break;
+        case 1:
+            // Saw Wave
+            osc.initialise ([](float x) { return x / juce::MathConstants<float>::pi; });
+            break;
+        case 2:
+            // Square Wave
+            osc.initialise ([](float x) { return x < 0.0f ? -1.0f : 1.0f; });
+            break;
+        default:
+            jassertfalse;
+            break;
+    }
+}
+
 void SynthVoice::renderNextBlock (juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples)
 {
     jassert (isPrepared);
