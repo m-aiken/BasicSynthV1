@@ -49,9 +49,9 @@ void OscEditor::resized()
     params.templateRows = {
         Track (Fr (1)),
         Track (Fr (1)),
-        Track (Fr (3)),
+        Track (Fr (4)),
         Track (Fr (1)),
-        Track (Fr (3))
+        Track (Fr (4))
     };
     
     params.items = {
