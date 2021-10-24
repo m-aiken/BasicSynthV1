@@ -19,7 +19,7 @@ BasicSynthV1AudioProcessorEditor::BasicSynthV1AudioProcessorEditor (BasicSynthV1
     // editor's size to whatever you need it to be.
     addAndMakeVisible (adsr);
     addAndMakeVisible (oscSelector);
-    setSize (400, 300);
+    setSize (500, 400);
 }
 
 BasicSynthV1AudioProcessorEditor::~BasicSynthV1AudioProcessorEditor()

@@ -45,9 +45,21 @@ void OscEditor::resized()
     juce::Grid params;
     
     params.templateColumns = { Track (Fr (1)) };
-    params.templateRows    = { Track (Fr (1)), Track (Fr (2)), Track (Fr (2)) };
+    params.templateRows = {
+        Track (Fr (1)),
+        Track (Fr (1)),
+        Track (Fr (3)),
+        Track (Fr (1)),
+        Track (Fr (3))
+    };
     
-    params.items = { juce::GridItem (oscSelector), juce::GridItem (fmFreqSlider), juce::GridItem (fmDepthSlider) };
+    params.items = {
+        juce::GridItem (oscSelector),
+        juce::GridItem (fmFreqLabel),
+        juce::GridItem (fmFreqSlider),
+        juce::GridItem (fmDepthLabel),
+        juce::GridItem (fmDepthSlider)
+    };
     
     params.performLayout (container);
 }
