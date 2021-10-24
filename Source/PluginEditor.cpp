@@ -19,7 +19,7 @@ BasicSynthV1AudioProcessorEditor::BasicSynthV1AudioProcessorEditor (BasicSynthV1
     // editor's size to whatever you need it to be.
     addAndMakeVisible (adsr);
     addAndMakeVisible (oscSelector);
-    setSize (500, 400);
+    setSize (600, 400);
 }
 
 BasicSynthV1AudioProcessorEditor::~BasicSynthV1AudioProcessorEditor()
@@ -37,14 +37,16 @@ void BasicSynthV1AudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
-    auto container = getLocalBounds();
+    auto container = getLocalBounds().reduced (10);
+    
+    auto bottom = container.removeFromBottom (getHeight() * 0.5f);
     
     using Track = juce::Grid::TrackInfo;
     using Fr    = juce::Grid::Fr;
     
     juce::Grid grid;
     
-    grid.templateColumns = { Track (Fr (1)), Track (Fr (3)) };
+    grid.templateColumns = { Track (Fr (1)), Track (Fr (1)) };
     grid.templateRows    = { Track (Fr (1)) };
     
     grid.items = { juce::GridItem (oscSelector), juce::GridItem (adsr) };

@@ -30,13 +30,13 @@ AdsrEditor::~AdsrEditor()
 void AdsrEditor::paint (juce::Graphics& g)
 {
     g.fillAll (juce::Colours::black);
+    g.setColour (juce::Colours::white);
+    g.drawRoundedRectangle (getLocalBounds().toFloat(), 5.0f, 2.0f);
 }
 
 void AdsrEditor::resized()
 {
-    auto container    = getLocalBounds();
-    auto topTwenty    = container.removeFromTop (getHeight() * 0.2f);
-    auto bottomTwenty = container.removeFromBottom (getHeight() * 0.2f);
+    auto container = getLocalBounds().reduced (10);
     
     using Track = juce::Grid::TrackInfo;
     using Fr    = juce::Grid::Fr;
@@ -44,9 +44,12 @@ void AdsrEditor::resized()
     juce::Grid adsrSliders;
     
     adsrSliders.templateColumns = { Track (Fr (1)), Track (Fr (1)), Track (Fr (1)), Track (Fr (1)) };
-    adsrSliders.templateRows    = { Track (Fr (1)) };
+    adsrSliders.templateRows    = { Track (Fr (1)), Track (Fr (5)) };
     
-    adsrSliders.items = { juce::GridItem (attackSlider), juce::GridItem (decaySlider), juce::GridItem (sustainSlider), juce::GridItem (releaseSlider) };
+    adsrSliders.items = {
+        juce::GridItem (attackLabel),  juce::GridItem (decayLabel),  juce::GridItem (sustainLabel),  juce::GridItem (releaseLabel),
+        juce::GridItem (attackSlider), juce::GridItem (decaySlider), juce::GridItem (sustainSlider), juce::GridItem (releaseSlider)
+    };
     
     adsrSliders.performLayout (container);
 }
@@ -60,5 +63,5 @@ void AdsrEditor::addADSRSlider (juce::Slider &slider, juce::Label &label, const 
     addAndMakeVisible (label);
     label.setText (labelText, juce::dontSendNotification);
     label.setJustificationType (juce::Justification::centred);
-    label.attachToComponent (&slider, false);
+    //label.attachToComponent (&slider, false);
 }
