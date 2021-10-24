@@ -20,6 +20,7 @@ OscEditor::OscEditor (juce::AudioProcessorValueTreeState& apvts)
     // initialise any special settings that your component needs.
     juce::StringArray choices { "Sine", "Saw", "Square" };
     oscSelector.addItemList (choices, 1);
+    oscSelector.setSelectedId (1);
     addAndMakeVisible (oscSelector);
     
     addFMRotary (fmFreqSlider, fmFreqLabel, "FM Frequency");
