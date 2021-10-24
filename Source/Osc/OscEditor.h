@@ -28,5 +28,11 @@ private:
     juce::ComboBox oscSelector;
     juce::AudioProcessorValueTreeState::ComboBoxAttachment oscSelectorAttachment;
     
+    juce::Slider fmFreqSlider, fmDepthSlider;
+    juce::Label  fmFreqLabel,  fmDepthLabel;
+    juce::AudioProcessorValueTreeState::SliderAttachment fmFreqAttachment, fmDepthAttachment;
+    
+    void addFMRotary (juce::Slider &slider, juce::Label &label, const juce::String &labelText);
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OscEditor)
 };

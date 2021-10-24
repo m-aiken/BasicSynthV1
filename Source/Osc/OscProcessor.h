@@ -19,6 +19,10 @@ public:
     void setWaveType (const int choice);
     void setFreq (const int midiNoteNum);
     void processOsc (juce::dsp::AudioBlock<float>& block);
+    void setFmParams (const float freq, const float depth);
 private:
-    
+    juce::dsp::Oscillator<float> fmOsc { [](float x) { return std::sin (x); }};
+    float fmMod { 0.0f };
+    float fmDepth { 1.0f };
+    int lastMidiNote { 0 };
 };

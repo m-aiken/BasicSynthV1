@@ -12,13 +12,18 @@
 
 //==============================================================================
 OscEditor::OscEditor (juce::AudioProcessorValueTreeState& apvts)
-    : oscSelectorAttachment (apvts, "oscType", oscSelector)
+    : oscSelectorAttachment (apvts, "oscType", oscSelector),
+      fmFreqAttachment (apvts, "fmFreq", fmFreqSlider),
+      fmDepthAttachment (apvts, "fmDepth", fmDepthSlider)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
     juce::StringArray choices { "Sine", "Saw", "Square" };
     oscSelector.addItemList (choices, 1);
     addAndMakeVisible (oscSelector);
+    
+    addFMRotary (fmFreqSlider, fmFreqLabel, "FM Frequency");
+    addFMRotary (fmDepthSlider, fmDepthLabel, "FM Depth");
 }
 
 OscEditor::~OscEditor()
@@ -32,5 +37,29 @@ void OscEditor::paint (juce::Graphics& g)
 
 void OscEditor::resized()
 {
-    oscSelector.setBounds (5, 5, 90, 20);
+    auto container    = getLocalBounds();
+    
+    using Track = juce::Grid::TrackInfo;
+    using Fr    = juce::Grid::Fr;
+    
+    juce::Grid params;
+    
+    params.templateColumns = { Track (Fr (1)) };
+    params.templateRows    = { Track (Fr (1)), Track (Fr (2)), Track (Fr (2)) };
+    
+    params.items = { juce::GridItem (oscSelector), juce::GridItem (fmFreqSlider), juce::GridItem (fmDepthSlider) };
+    
+    params.performLayout (container);
+}
+
+void OscEditor::addFMRotary (juce::Slider &slider, juce::Label &label, const juce::String &labelText)
+{
+    addAndMakeVisible (slider);
+    slider.setSliderStyle (juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    slider.setTextBoxStyle (juce::Slider::TextBoxBelow, false, 40, 20);
+    
+    addAndMakeVisible (label);
+    label.setText (labelText, juce::dontSendNotification);
+    label.setJustificationType (juce::Justification::centred);
+    label.attachToComponent (&slider, false);
 }

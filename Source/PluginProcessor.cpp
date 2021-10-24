@@ -153,16 +153,20 @@ void BasicSynthV1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
     {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
         {
-            // Osc, ADSR, LFO controls...
+            // ADSR
             auto& attack  = *apvts.getRawParameterValue ("attack");
             auto& decay   = *apvts.getRawParameterValue ("decay");
             auto& sustain = *apvts.getRawParameterValue ("sustain");
             auto& release = *apvts.getRawParameterValue ("release");
-            
+            // Osc
             auto& oscWave = *apvts.getRawParameterValue ("oscType");
+            // FM
+            auto& fmFreq  = *apvts.getRawParameterValue ("fmFreq");
+            auto& fmDepth = *apvts.getRawParameterValue ("fmDepth");
             
-            voice->update (attack.load(), decay.load(), sustain.load(), release.load());
             voice->getOscillator().setWaveType (oscWave);
+            voice->getOscillator().setFmParams (fmFreq, fmDepth);
+            voice->update (attack.load(), decay.load(), sustain.load(), release.load());
         }
     }
     
@@ -202,8 +206,11 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicSynthV1AudioProcessor::
     juce::StringArray oscTypes { "Sine", "Saw", "Square" };
     layout.add(std::make_unique<juce::AudioParameterChoice> ("oscType", "Oscillator Type", oscTypes, 0));
     
+    // FM
+    layout.add(std::make_unique<juce::AudioParameterFloat> ("fmFreq",  "FM Frequency", juce::NormalisableRange<float> (0.0f, 1000.0f, 1.0f, 0.3f), 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat> ("fmDepth", "FM Depth",     juce::NormalisableRange<float> (0.0f, 1000.0f, 1.0f, 0.3f), 0.0f));
+    
     // ADSR
-    // NoramalisableRange args are rangeStart, rangeEnd, interval, defaultValue
     layout.add(std::make_unique<juce::AudioParameterFloat> ("attack",  "Attack",  juce::NormalisableRange<float> (0.1f, 1.0f, 0.01f), 0.1f));
     layout.add(std::make_unique<juce::AudioParameterFloat> ("decay",   "Decay",   juce::NormalisableRange<float> (0.1f, 1.0f, 0.01f), 0.1f));
     layout.add(std::make_unique<juce::AudioParameterFloat> ("sustain", "Sustain", juce::NormalisableRange<float> (0.1f, 1.0f, 0.01f), 1.0f));
