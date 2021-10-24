@@ -18,6 +18,12 @@
         <FILE id="MBF244" name="AdsrEditor.cpp" compile="1" resource="0" file="Source/ADSR/AdsrEditor.cpp"/>
         <FILE id="SyT86N" name="AdsrEditor.h" compile="0" resource="0" file="Source/ADSR/AdsrEditor.h"/>
       </GROUP>
+      <GROUP id="{884B94ED-CBC9-178C-B1CF-6AA7BCF52AE7}" name="Filter">
+        <FILE id="pyw9jI" name="FilterProcessor.cpp" compile="1" resource="0"
+              file="Source/Filter/FilterProcessor.cpp"/>
+        <FILE id="c827yJ" name="FilterProcessor.h" compile="0" resource="0"
+              file="Source/Filter/FilterProcessor.h"/>
+      </GROUP>
       <FILE id="vUelov" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="zyVmaC" name="PluginProcessor.h" compile="0" resource="0"
