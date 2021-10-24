@@ -17,7 +17,7 @@ bool SynthVoice::canPlaySound (juce::SynthesiserSound* sound)
 
 void SynthVoice::startNote (int midiNoteNumber, float velocity, juce::SynthesiserSound *sound, int currentPitchWheelPosition)
 {
-    osc.setFrequency (juce::MidiMessage::getMidiNoteInHertz (midiNoteNumber));
+    osc.setFreq (midiNoteNumber);
     adsr.noteOn();
 }
 
@@ -48,7 +48,7 @@ void SynthVoice::prepareToPlay (double sampleRate, int samplesPerBlock, int outp
     spec.sampleRate       = sampleRate;
     spec.numChannels      = outputChannels;
     
-    osc.prepare (spec);
+    osc.prepareOsc (spec);
     gain.prepare (spec);
     
     gain.setGainLinear (0.8f);
@@ -56,37 +56,32 @@ void SynthVoice::prepareToPlay (double sampleRate, int samplesPerBlock, int outp
     isPrepared = true;
 }
 
-void SynthVoice::updateAdsr (const float attack, const float decay, const float sustain, const float release)
+void SynthVoice::update (const float attack, const float decay, const float sustain, const float release)
 {
-    adsrParams.attack  = attack;
-    adsrParams.decay   = decay;
-    adsrParams.sustain = sustain;
-    adsrParams.release = release;
-    
-    adsr.setParameters (adsrParams);
+    adsr.updateAdsr (attack, decay, sustain, release);
 }
 
-void SynthVoice::setWaveType (const int choice)
-{
-    switch (choice)
-    {
-        case 0:
-            // Sine Wave
-            osc.initialise ([](float x) { return std::sin (x); });
-            break;
-        case 1:
-            // Saw Wave
-            osc.initialise ([](float x) { return x / juce::MathConstants<float>::pi; });
-            break;
-        case 2:
-            // Square Wave
-            osc.initialise ([](float x) { return x < 0.0f ? -1.0f : 1.0f; });
-            break;
-        default:
-            jassertfalse;
-            break;
-    }
-}
+//void SynthVoice::setWaveType (const int choice)
+//{
+//    switch (choice)
+//    {
+//        case 0:
+//            // Sine Wave
+//            osc.initialise ([](float x) { return std::sin (x); });
+//            break;
+//        case 1:
+//            // Saw Wave
+//            osc.initialise ([](float x) { return x / juce::MathConstants<float>::pi; });
+//            break;
+//        case 2:
+//            // Square Wave
+//            osc.initialise ([](float x) { return x < 0.0f ? -1.0f : 1.0f; });
+//            break;
+//        default:
+//            jassertfalse;
+//            break;
+//    }
+//}
 
 void SynthVoice::renderNextBlock (juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples)
 {
@@ -99,7 +94,7 @@ void SynthVoice::renderNextBlock (juce::AudioBuffer<float> &outputBuffer, int st
     synthBuffer.clear();
     
     juce::dsp::AudioBlock<float> audioBlock { synthBuffer };
-    osc.process (juce::dsp::ProcessContextReplacing<float> (audioBlock));
+    osc.processOsc (audioBlock);
     gain.process (juce::dsp::ProcessContextReplacing<float> (audioBlock));
     
     adsr.applyEnvelopeToBuffer (synthBuffer, 0, synthBuffer.getNumSamples());

@@ -10,8 +10,8 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
-#include "ADSR/AdsrComponent.h"
-#include "Osc/OscComponent.h"
+#include "ADSR/AdsrEditor.h"
+#include "Osc/OscEditor.h"
 
 //==============================================================================
 /**
@@ -31,8 +31,8 @@ private:
     // access the processor object that created it.
     BasicSynthV1AudioProcessor& audioProcessor;
     
-    AdsrComponent adsr;
-    OscComponent  oscSelector;
+    AdsrEditor adsr;
+    OscEditor oscSelector;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicSynthV1AudioProcessorEditor)
 };

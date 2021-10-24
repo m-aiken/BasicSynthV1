@@ -5,14 +5,18 @@
   <MAINGROUP id="rfG2qg" name="BasicSynthV1">
     <GROUP id="{D1F8ECCD-09A1-EFBA-D49D-BF4A39063E62}" name="Source">
       <GROUP id="{C3665FD1-385F-5AF9-EAC8-A2A0F10699A3}" name="Osc">
-        <FILE id="xZkSmv" name="OscComponent.cpp" compile="1" resource="0"
-              file="Source/Osc/OscComponent.cpp"/>
-        <FILE id="G3to8E" name="OscComponent.h" compile="0" resource="0" file="Source/Osc/OscComponent.h"/>
+        <FILE id="xZkSmv" name="OscEditor.cpp" compile="1" resource="0" file="Source/Osc/OscEditor.cpp"/>
+        <FILE id="G3to8E" name="OscEditor.h" compile="0" resource="0" file="Source/Osc/OscEditor.h"/>
+        <FILE id="bAi0KS" name="OscProcessor.cpp" compile="1" resource="0"
+              file="Source/Osc/OscProcessor.cpp"/>
+        <FILE id="tVQphQ" name="OscProcessor.h" compile="0" resource="0" file="Source/Osc/OscProcessor.h"/>
       </GROUP>
       <GROUP id="{6C551637-413C-63A8-6F87-C4385F3492B9}" name="ADSR">
-        <FILE id="MBF244" name="AdsrComponent.cpp" compile="1" resource="0"
-              file="Source/ADSR/AdsrComponent.cpp"/>
-        <FILE id="SyT86N" name="AdsrComponent.h" compile="0" resource="0" file="Source/ADSR/AdsrComponent.h"/>
+        <FILE id="k884d7" name="AdsrProcessor.cpp" compile="1" resource="0"
+              file="Source/ADSR/AdsrProcessor.cpp"/>
+        <FILE id="oalGTI" name="AdsrProcessor.h" compile="0" resource="0" file="Source/ADSR/AdsrProcessor.h"/>
+        <FILE id="MBF244" name="AdsrEditor.cpp" compile="1" resource="0" file="Source/ADSR/AdsrEditor.cpp"/>
+        <FILE id="SyT86N" name="AdsrEditor.h" compile="0" resource="0" file="Source/ADSR/AdsrEditor.h"/>
       </GROUP>
       <FILE id="vUelov" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>

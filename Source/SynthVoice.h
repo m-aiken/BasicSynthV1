@@ -12,6 +12,8 @@
 
 #include <JuceHeader.h>
 #include "SynthSound.h"
+#include "ADSR/AdsrProcessor.h"
+#include "Osc/OscProcessor.h"
 
 class SynthVoice : public juce::SynthesiserVoice
 {
@@ -23,19 +25,17 @@ public:
     void controllerMoved (int controllerNumber, int newControllerValue) override;
     void prepareToPlay (double sampleRate, int samplesPerBlock, int outputChannels); // Not override as this fn doesn't come from juce::SynthesiserVoice
     
-    void updateAdsr (const float attack, const float decay, const float sustain, const float release);
-    void setWaveType (const int choice);
+    void update (const float attack, const float decay, const float sustain, const float release);
+    OscProcessor& getOscillator() { return osc; };
     
     void renderNextBlock (juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples) override;
 private:
-    juce::ADSR adsr;
-    juce::ADSR::Parameters adsrParams;
+    AdsrProcessor adsr;
     
     juce::AudioBuffer<float> synthBuffer;
     
-    juce::dsp::Oscillator<float> osc;
+    OscProcessor osc;
+    
     juce::dsp::Gain<float> gain;
     bool isPrepared { false };
-    
-    
 };

@@ -44,10 +44,10 @@ void BasicSynthV1AudioProcessorEditor::resized()
     
     juce::Grid grid;
     
-    grid.templateColumns = { Track (Fr (3)), Track (Fr (1)) };
+    grid.templateColumns = { Track (Fr (1)), Track (Fr (3)) };
     grid.templateRows    = { Track (Fr (1)) };
     
-    grid.items = { juce::GridItem (adsr), juce::GridItem (oscSelector) };
+    grid.items = { juce::GridItem (oscSelector), juce::GridItem (adsr) };
     
     grid.performLayout (container);
 }
