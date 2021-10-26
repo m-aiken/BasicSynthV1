@@ -21,4 +21,6 @@ public:
     void resetFilter ();
 private:
     juce::dsp::StateVariableTPTFilter<float> filter;
+    
+    bool isPrepared { false };
 };

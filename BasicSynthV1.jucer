@@ -19,6 +19,9 @@
         <FILE id="SyT86N" name="AdsrEditor.h" compile="0" resource="0" file="Source/ADSR/AdsrEditor.h"/>
       </GROUP>
       <GROUP id="{884B94ED-CBC9-178C-B1CF-6AA7BCF52AE7}" name="Filter">
+        <FILE id="EmxnKR" name="FilterEditor.cpp" compile="1" resource="0"
+              file="Source/Filter/FilterEditor.cpp"/>
+        <FILE id="uJNwZx" name="FilterEditor.h" compile="0" resource="0" file="Source/Filter/FilterEditor.h"/>
         <FILE id="pyw9jI" name="FilterProcessor.cpp" compile="1" resource="0"
               file="Source/Filter/FilterProcessor.cpp"/>
         <FILE id="c827yJ" name="FilterProcessor.h" compile="0" resource="0"

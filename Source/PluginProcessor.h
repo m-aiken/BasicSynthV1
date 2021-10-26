@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "SynthSound.h"
 #include "SynthVoice.h"
+#include "Filter/FilterProcessor.h"
 
 //==============================================================================
 /**
@@ -61,6 +62,7 @@ public:
 
 private:
     juce::Synthesiser synth;
+    FilterProcessor filter;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicSynthV1AudioProcessor)
