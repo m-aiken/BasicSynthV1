@@ -15,15 +15,24 @@
 //==============================================================================
 /*
 */
-class FIlterEditor  : public juce::Component
+class FilterEditor  : public juce::Component
 {
 public:
-    FIlterEditor();
-    ~FIlterEditor() override;
+    FilterEditor(juce::AudioProcessorValueTreeState& apvts);
+    ~FilterEditor() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FIlterEditor)
+    juce::ComboBox filterTypeSelector;
+    juce::AudioProcessorValueTreeState::ComboBoxAttachment filterTypeAttachment;
+    
+    juce::Slider cutoffRotary, resonanceRotary;
+    juce::Label  cutoffLabel, resonanceLabel;
+    juce::AudioProcessorValueTreeState::SliderAttachment cutoffAttachment, resonanceAttachment;
+    
+    void addCutoffResRotary (juce::Slider &slider, juce::Label &label, const juce::String &labelText);
+    
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FilterEditor)
 };

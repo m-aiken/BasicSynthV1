@@ -12,40 +12,46 @@
 #include "FilterEditor.h"
 
 //==============================================================================
-FIlterEditor::FIlterEditor()
+FilterEditor::FilterEditor(juce::AudioProcessorValueTreeState& apvts)
+    : filterTypeAttachment (apvts, "filterType", filterTypeSelector),
+      cutoffAttachment (apvts, "cutoff", cutoffRotary),
+      resonanceAttachment (apvts, "resonance", resonanceRotary)
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
-
+    juce::StringArray filterOptions { "Lowpass", "Bandpass", "Highpass" };
+    filterTypeSelector.addItemList (filterOptions, 1);
+    filterTypeSelector.setSelectedId (1);
+    addAndMakeVisible (filterTypeSelector);
+    
+    addCutoffResRotary (cutoffRotary, cutoffLabel, "Cutoff");
+    addCutoffResRotary (resonanceRotary, resonanceLabel, "Resonance");
 }
 
-FIlterEditor::~FIlterEditor()
+FilterEditor::~FilterEditor()
 {
 }
 
-void FIlterEditor::paint (juce::Graphics& g)
+void FilterEditor::paint (juce::Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
-
-    g.setColour (juce::Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
+    g.fillAll (juce::Colours::black);
     g.setColour (juce::Colours::white);
-    g.setFont (14.0f);
-    g.drawText ("FIlterEditor", getLocalBounds(),
-                juce::Justification::centred, true);   // draw some placeholder text
+    g.drawRoundedRectangle (getLocalBounds().toFloat(), 5.0f, 2.0f);
 }
 
-void FIlterEditor::resized()
+void FilterEditor::resized()
 {
     // This method is where you should set the bounds of any child
     // components that your component contains..
 
+}
+
+void FilterEditor::addCutoffResRotary (juce::Slider &slider, juce::Label &label, const juce::String &labelText)
+{
+    addAndMakeVisible (slider);
+    slider.setSliderStyle (juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    slider.setTextBoxStyle (juce::Slider::TextBoxBelow, false, 40, 20);
+    
+    addAndMakeVisible (label);
+    label.setText (labelText, juce::dontSendNotification);
+    label.setJustificationType (juce::Justification::centred);
+    //label.attachToComponent (&slider, false);
 }
