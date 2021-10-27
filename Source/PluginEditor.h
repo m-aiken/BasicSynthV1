@@ -12,6 +12,7 @@
 #include "PluginProcessor.h"
 #include "ADSR/AdsrEditor.h"
 #include "Osc/OscEditor.h"
+#include "Filter/FilterEditor.h"
 
 //==============================================================================
 /**
@@ -33,6 +34,7 @@ private:
     
     AdsrEditor adsr;
     OscEditor oscSelector;
+    FilterEditor filterParams;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicSynthV1AudioProcessorEditor)
 };

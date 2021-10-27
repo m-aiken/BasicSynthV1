@@ -39,8 +39,28 @@ void FilterEditor::paint (juce::Graphics& g)
 
 void FilterEditor::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
+    auto container = getLocalBounds().reduced (10);
+    
+    using Track = juce::Grid::TrackInfo;
+    using Fr    = juce::Grid::Fr;
+    
+    juce::Grid filterParams;
+    /*
+    filterParams.templateColumns = { Track (Fr (1)), Track (Fr (1)), Track (Fr (1)) };
+    filterParams.templateRows    = { Track (Fr (1)) };
+    
+    filterParams.items = { juce::GridItem (filterTypeSelector), juce::GridItem (cutoffRotary), juce::GridItem (resonanceRotary) };
+    */
+    filterParams.templateColumns = { Track (Fr (1)), Track (Fr (1)), Track (Fr (1)) };
+    filterParams.templateRows = {
+        Track (Fr (1)),
+        Track (Fr (4))
+    };
+    
+    filterParams.items = { juce::GridItem (filterTypeSelector), juce::GridItem (cutoffLabel),  juce::GridItem (resonanceLabel),
+                           juce::GridItem (),                   juce::GridItem (cutoffRotary), juce::GridItem (resonanceRotary) };
+    
+    filterParams.performLayout (container);
 
 }
 

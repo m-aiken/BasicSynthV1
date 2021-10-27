@@ -13,12 +13,14 @@
 BasicSynthV1AudioProcessorEditor::BasicSynthV1AudioProcessorEditor (BasicSynthV1AudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p),
       adsr (audioProcessor.apvts),
-      oscSelector (audioProcessor.apvts)
+      oscSelector (audioProcessor.apvts),
+      filterParams (audioProcessor.apvts)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     addAndMakeVisible (adsr);
     addAndMakeVisible (oscSelector);
+    addAndMakeVisible (filterParams);
     setSize (600, 400);
 }
 
@@ -39,7 +41,7 @@ void BasicSynthV1AudioProcessorEditor::resized()
     // subcomponents in your editor..
     auto container = getLocalBounds().reduced (10);
     
-    auto bottom = container.removeFromBottom (getHeight() * 0.5f);
+    //auto bottom = container.removeFromBottom (getHeight() * 0.5f);
     
     using Track = juce::Grid::TrackInfo;
     using Fr    = juce::Grid::Fr;
@@ -47,9 +49,12 @@ void BasicSynthV1AudioProcessorEditor::resized()
     juce::Grid grid;
     
     grid.templateColumns = { Track (Fr (1)), Track (Fr (1)) };
-    grid.templateRows    = { Track (Fr (1)) };
+    grid.templateRows    = { Track (Fr (1)), Track (Fr (1)) };
     
-    grid.items = { juce::GridItem (oscSelector), juce::GridItem (adsr) };
+    grid.items = {
+        juce::GridItem (oscSelector),  juce::GridItem (adsr),
+        juce::GridItem (filterParams), juce::GridItem ()
+    };
     
     grid.performLayout (container);
 }
