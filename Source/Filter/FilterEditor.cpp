@@ -45,12 +45,7 @@ void FilterEditor::resized()
     using Fr    = juce::Grid::Fr;
     
     juce::Grid filterParams;
-    /*
-    filterParams.templateColumns = { Track (Fr (1)), Track (Fr (1)), Track (Fr (1)) };
-    filterParams.templateRows    = { Track (Fr (1)) };
-    
-    filterParams.items = { juce::GridItem (filterTypeSelector), juce::GridItem (cutoffRotary), juce::GridItem (resonanceRotary) };
-    */
+  
     filterParams.templateColumns = { Track (Fr (1)), Track (Fr (1)), Track (Fr (1)) };
     filterParams.templateRows = {
         Track (Fr (1)),
