@@ -35,6 +35,7 @@ private:
     AdsrEditor adsr;
     OscEditor oscSelector;
     FilterEditor filterParams;
+    AdsrEditor filterAdsr;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicSynthV1AudioProcessorEditor)
 };
