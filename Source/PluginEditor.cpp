@@ -12,10 +12,10 @@
 //==============================================================================
 BasicSynthV1AudioProcessorEditor::BasicSynthV1AudioProcessorEditor (BasicSynthV1AudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p),
-      adsr (audioProcessor.apvts),
+      adsr (audioProcessor.apvts, 0),
       oscSelector (audioProcessor.apvts),
       filterParams (audioProcessor.apvts),
-      filterAdsr (audioProcessor.apvts)
+      filterAdsr (audioProcessor.apvts, 1)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.

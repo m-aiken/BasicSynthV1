@@ -18,13 +18,15 @@
 class AdsrEditor  : public juce::Component
 {
 public:
-    AdsrEditor (juce::AudioProcessorValueTreeState& apvts);
+    AdsrEditor (juce::AudioProcessorValueTreeState& apvts, int type);
     ~AdsrEditor() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
+    juce::StringArray attackOptions, decayOptions, sustainOptions, releaseOptions;
+    
     juce::Slider attackSlider, decaySlider, sustainSlider, releaseSlider;
     juce::Label  attackLabel,  decayLabel,  sustainLabel,  releaseLabel;
     juce::AudioProcessorValueTreeState::SliderAttachment attackAttachment, decayAttachment, sustainAttachment, releaseAttachment;
