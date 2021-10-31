@@ -68,5 +68,4 @@ void FilterEditor::addCutoffResRotary (juce::Slider &slider, juce::Label &label,
     addAndMakeVisible (label);
     label.setText (labelText, juce::dontSendNotification);
     label.setJustificationType (juce::Justification::centred);
-    //label.attachToComponent (&slider, false);
 }

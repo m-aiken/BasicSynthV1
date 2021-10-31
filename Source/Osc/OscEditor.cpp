@@ -16,8 +16,6 @@ OscEditor::OscEditor (juce::AudioProcessorValueTreeState& apvts)
       fmFreqAttachment (apvts, "fmFreq", fmFreqSlider),
       fmDepthAttachment (apvts, "fmDepth", fmDepthSlider)
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
     juce::StringArray choices { "Sine", "Saw", "Square" };
     oscSelector.addItemList (choices, 1);
     oscSelector.setSelectedId (1);
@@ -68,5 +66,4 @@ void OscEditor::addFMRotary (juce::Slider &slider, juce::Label &label, const juc
     addAndMakeVisible (label);
     label.setText (labelText, juce::dontSendNotification);
     label.setJustificationType (juce::Justification::centred);
-    //label.attachToComponent (&slider, false);
 }
