@@ -11,15 +11,11 @@
 #include "AdsrEditor.h"
 
 //==============================================================================
-AdsrEditor::AdsrEditor (juce::AudioProcessorValueTreeState& apvts, int type)
-    : attackOptions ("attack", "filterAttack"),
-      decayOptions ("decay", "filterDecay"),
-      sustainOptions ("sustain", "filterSustain"),
-      releaseOptions ("release", "filterRelease"),
-      attackAttachment  (apvts, attackOptions[type], attackSlider),
-      decayAttachment   (apvts, decayOptions[type], decaySlider),
-      sustainAttachment (apvts, sustainOptions[type], sustainSlider),
-      releaseAttachment (apvts, releaseOptions[type], releaseSlider)
+AdsrEditor::AdsrEditor (juce::AudioProcessorValueTreeState& apvts)
+    : attackAttachment  (apvts, "attack", attackSlider),
+      decayAttachment   (apvts, "decay", decaySlider),
+      sustainAttachment (apvts, "sustain", sustainSlider),
+      releaseAttachment (apvts, "release", releaseSlider)
 {
     addADSRSlider (attackSlider, attackLabel, "A");
     addADSRSlider (decaySlider, decayLabel, "D");

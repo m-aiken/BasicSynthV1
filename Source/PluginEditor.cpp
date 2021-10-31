@@ -12,17 +12,15 @@
 //==============================================================================
 BasicSynthV1AudioProcessorEditor::BasicSynthV1AudioProcessorEditor (BasicSynthV1AudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p),
-      adsr (audioProcessor.apvts, 0),
+      adsr (audioProcessor.apvts),
       oscSelector (audioProcessor.apvts),
-      filterParams (audioProcessor.apvts),
-      filterAdsr (audioProcessor.apvts, 1)
+      filterParams (audioProcessor.apvts)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     addAndMakeVisible (adsr);
     addAndMakeVisible (oscSelector);
     addAndMakeVisible (filterParams);
-    addAndMakeVisible (filterAdsr);
     setSize (600, 400);
 }
 
@@ -55,7 +53,7 @@ void BasicSynthV1AudioProcessorEditor::resized()
     
     grid.items = {
         juce::GridItem (oscSelector),  juce::GridItem (adsr),
-        juce::GridItem (filterParams), juce::GridItem (filterAdsr)
+        juce::GridItem (filterParams), juce::GridItem ()
     };
     
     grid.performLayout (container);

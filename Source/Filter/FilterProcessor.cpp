@@ -51,11 +51,6 @@ void FilterProcessor::updateFilter (const int filterType, const float frequency,
     filter.setResonance (resonance);
 }
 
-void FilterProcessor::updateEnvelope (const float attack, const float decay, const float sustain, const float release)
-{
-    filterAdsr.updateAdsr (attack, decay, sustain, release);
-}
-
 void FilterProcessor::resetFilter ()
 {
     filter.reset();

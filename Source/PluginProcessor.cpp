@@ -178,13 +178,7 @@ void BasicSynthV1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
     auto& cutoff     = *apvts.getRawParameterValue ("cutoff");
     auto& resonance  = *apvts.getRawParameterValue ("resonance");
     
-    auto& filterAttack  = *apvts.getRawParameterValue ("filterAttack");
-    auto& filterDecay   = *apvts.getRawParameterValue ("filterDecay");
-    auto& filterSustain = *apvts.getRawParameterValue ("filterSustain");
-    auto& filterRelease = *apvts.getRawParameterValue ("filterRelease");
-    
     filter.updateFilter (filterType, cutoff, resonance);
-    filter.updateEnvelope (filterAttack, filterDecay, filterSustain, filterRelease);
     
     filter.processFilter (buffer);
 }
@@ -238,12 +232,6 @@ juce::AudioProcessorValueTreeState::ParameterLayout BasicSynthV1AudioProcessor::
     
     layout.add(std::make_unique<juce::AudioParameterFloat> ("cutoff",    "Cutoff",    juce::NormalisableRange<float> (20.0f, 20000.0f, 0.01f, 0.6f), 200.0f));
     layout.add(std::make_unique<juce::AudioParameterFloat> ("resonance", "Resonance", juce::NormalisableRange<float> (1.0f, 10.0f, 0.01f), 1.0f));
-    
-    // Filter ADSR
-    layout.add(std::make_unique<juce::AudioParameterFloat> ("filterAttack",  "Filter Attack",  juce::NormalisableRange<float> (0.1f, 1.0f, 0.01f), 0.1f));
-    layout.add(std::make_unique<juce::AudioParameterFloat> ("filterDecay",   "Filter Decay",   juce::NormalisableRange<float> (0.1f, 1.0f, 0.01f), 0.1f));
-    layout.add(std::make_unique<juce::AudioParameterFloat> ("filterSustain", "Filter Sustain", juce::NormalisableRange<float> (0.1f, 1.0f, 0.01f), 1.0f));
-    layout.add(std::make_unique<juce::AudioParameterFloat> ("filterRelease", "Filter Release", juce::NormalisableRange<float> (0.1f, 3.0f, 0.01f), 0.4f));
     
     return layout;
 }
